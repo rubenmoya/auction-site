@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :users
   resources :user_sessions
-
-  resources :products
+  
+  resources :products do
+    resources :bids, only: [:create]
+  end
 end

@@ -5,7 +5,7 @@ class UserSessionsController < ApplicationController
 
   def create
     if @user = login(params[:email], params[:password])
-      redirect_back_or_to :users, flash: { success: 'Login successful'}
+      redirect_back_or_to root_path, flash: { success: 'Login successful'}
     else
       flash.now[:danger] = 'Login failed'
       render 'new'

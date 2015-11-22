@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @bid = @product.bids.build
   end
 
   def new

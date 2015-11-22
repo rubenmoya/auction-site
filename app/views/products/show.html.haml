@@ -2,7 +2,53 @@
 %p
   User:
   =@product.user.username
-  
+
 %p=@product.description
-%p= distance_of_time_in_words(Time.now, @product.deadline)
+%p= @product.deadline.to_formatted_s(:short)
 %p=link_to "[Delete]", product_path(@product), method: :delete, data: { confirm: "Are you sure?" }
+
+%hr/
+
+- if @product.bid_active?
+  %section.bids.left
+    %h3
+      =pluralize(@product.bids.persisted.count, "Bid")
+
+    %hr/
+    - if @product.bids.any?
+      - @product.bids.persisted.each do |bid|
+        %p= bid.amount
+        %i.comment-time
+          \-
+          = time_ago_in_words(bid.created_at)
+          ago by #{bid.user.username}
+
+        %hr/
+    - else
+      There are no bids yet.
+
+    = form_for [@product, @bid ] do |f|
+      - if @bid.errors.any?
+        .alert.alert-danger
+          %b
+            = pluralize(@bid.errors.count, "error")
+            prohibited this bid from being saved:
+            %ul
+              - @product.errors.full_messages.each do |msg|
+                %li
+                  = msg
+      %fieldset
+        = f.label :amount
+        = f.number_field :amount, class: 'form-control'
+        = f.hidden_field(:user_id, value: current_user.id)
+      %fieldset
+        = f.submit "Bid", class: 'btn btn--blue btn--block'
+
+- else
+  %h3 The auction has finished
+  %p
+    The winner was
+    %b= @product.get_winner.username
+    with a
+    %b= number_to_currency(@product.best_bid.amount)
+    bid

@@ -3,5 +3,5 @@
 - @products.each do |product|
   %h4=link_to product.title, product_path(product)
   %p=product.description
-  %p= product.deadline
+  %p= product.deadline.to_formatted_s(:short)
   %hr/
