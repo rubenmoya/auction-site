@@ -1,9 +1,19 @@
-%nav.navbar.navbar-dark.bg-primary.m-b-md
+%nav.navbar.navbar-dark.bg-inverse.m-b-md
   .container
     =link_to "e-Buy", root_path, class: "navbar-brand"
 
     %ul.nav.navbar-nav.pull-right
       %li.nav-item
         =link_to "All products", root_path, class: "nav-link"
-      %li.nav-item
-        =link_to "New product", new_product_path, class: "nav-link"
+      - if current_user
+        %li.nav-item
+          = link_to "Edit Profile", edit_user_path(current_user.id), class: "nav-link"
+        %li.nav-item
+          = link_to "Logout", :logout, method: :post, class: "nav-link"
+        %li.nav-item
+          =link_to "New product", new_product_path, class: "btn btn-info-outline"
+      - else
+        %li.nav-item
+          = link_to "Register", new_user_path, class: "nav-link"
+        %li.nav-item
+          = link_to "Login", :login, class: "btn btn-info-outline"

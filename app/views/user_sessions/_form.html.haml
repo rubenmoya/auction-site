@@ -1,0 +1,9 @@
+= form_tag user_sessions_path, :method => :post do
+  %fieldset.form-group
+    = label_tag :email
+    = text_field_tag :email, nil, class: "form-control"
+  %fieldset.form-group
+    = label_tag :password
+    = password_field_tag :password, nil, class: "form-control"
+  %fieldset.form-group
+    = submit_tag "Login", class: "btn btn-primary"
