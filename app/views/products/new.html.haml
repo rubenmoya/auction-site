@@ -1,0 +1,16 @@
+= form_for @product do |f|
+
+  %fieldset.form-group
+    =f.label :title
+    =f.text_field :title, class: "form-control"
+
+  %fieldset.form-group
+    =f.label :description
+    =f.text_area :description, class: "form-control"
+
+  %fieldset.form-group
+    =f.label :deadline
+    =f.datetime_local_field :deadline, class: "form-control"
+
+  %fieldset.form-group
+    =f.submit "Submit", class: "btn btn-primary"

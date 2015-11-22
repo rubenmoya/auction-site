@@ -1,0 +1,9 @@
+%nav.navbar.navbar-dark.bg-primary.m-b-md
+  .container
+    =link_to "e-Buy", root_path, class: "navbar-brand"
+
+    %ul.nav.navbar-nav.pull-right
+      %li.nav-item
+        =link_to "All products", root_path, class: "nav-link"
+      %li.nav-item
+        =link_to "New product", new_product_path, class: "nav-link"

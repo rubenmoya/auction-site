@@ -1,0 +1,7 @@
+%h2 Products list
+
+- @products.each do |product|
+  %h4=link_to product.title, product_path(product)
+  %p=product.description
+  %p= product.deadline
+  %hr/

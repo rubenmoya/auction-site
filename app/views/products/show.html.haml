@@ -1,0 +1,4 @@
+%h2=@product.title
+%p=@product.description
+%p= distance_of_time_in_words(Time.now, @product.deadline)
+%p=link_to "[Delete]", product_path(@product), method: :delete, data: { confirm: "Are you sure?" }
